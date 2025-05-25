@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create_users_table" author="Mikhail Ponomarev">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="insert_into_users_table" author="Mikhail Ponomarev">
+        <insert tableName="users">
+            <column name="name" value="John"/>
+            <column name="surname" value="Doe"/>
+            <column name="email" value="john.doe@example.com"/>
+        </insert>
+        <insert tableName="users">
+            <column name="name" value="Jane"/>
+            <column name="surname" value="Smith"/>
+            <column name="email" value="jane.smith@example.com"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
