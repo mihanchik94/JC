@@ -1,0 +1,41 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="create_orders_table" author="Mikhail Ponomarev">
+        <createTable tableName="orders">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="products" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_price" type="DECIMAL(10,2)"/>
+            <column name="status" type="VARCHAR(50)"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="fk_orders_user"
+                baseTableName="orders"
+                baseColumnNames="user_id"
+                referencedTableName="users"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="4" author="developer">
+        <insert tableName="orders">
+            <column name="products" value="Laptop, Mouse"/>
+            <column name="total_price" value="1500.00"/>
+            <column name="status" value="ACCEPTED"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="orders">
+            <column name="products" value="Keyboard, Monitor"/>
+            <column name="total_price" value="800.00"/>
+            <column name="status" value="COMPLETED"/>
+            <column name="user_id" valueNumeric="2"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
