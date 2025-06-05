@@ -1,0 +1,25 @@
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:mykeystore.jks
+    key-store-password: password
+    key-password: password
+    key-alias: mykey
+
+jwt:
+  secret-key: NDQ1ZjAzNjQtMzViZjQtMDRjLTljZjQtNjNjYWIyZTU5ZDYw
+  access-token-expired: 900000 #15 minutes
+  refresh-token-expired: 3600000 #60 minutes
+
+spring:
+  jpa:
+    hibernate:
+      show-sql: true
+  liquibase:
+    change-log: db.changelog/changelog.xml
+
+logging:
+  file:
+    name: logs/application.log
+  level:
+    root: INFO
