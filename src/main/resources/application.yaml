@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  liquibase:
+    change-log: db.changelog/changelog.xml
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_SECRET}
+            redirect-uri: http://localhost:8080/login/oauth2/code/github
+            scope: read:user
+      provider:
+        github:
+          authorization-uri: https://github.com/login/oauth2/authorize
+          token-uri: https://github.com/login/oauth2/access_token
+
