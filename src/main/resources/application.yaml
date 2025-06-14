@@ -1,0 +1,41 @@
+server:
+  port: 8082
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092,localhost:9094,localhost:9096
+
+    producer:
+      acks: all
+      retries: 3
+      linger-ms: 20
+      batch-size: 16384
+
+    consumer:
+      group-id: shipping-group
+      json-trusted-packages: ru.itk.kafka.shipping.dto
+
+    topics:
+      payed_orders:
+        name: payed_orders
+
+      sent_orders:
+        name: sent_orders
+        replicas: 3
+        partitions: 3
+
+      sent_orders-dlq:
+        name: sent_orders-dlq
+        replicas: 2
+        partitions: 3
+
+
+async:
+  kafka-executor:
+    core-pool-size: 4
+    max-pool-size: 8
+    queue-capacity: 100
+
+retries:
+  retry-policy: 3
+  back-off-period: 1000
