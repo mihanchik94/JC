@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092,localhost:9094,localhost:9096
+
+    producer:
+      acks: all
+      retries: 3
+      linger-ms: 20
+      batch-size: 16384
+
+    consumer:
+      group-id: web_logs-group
+      json-trusted-packages: ru.itk.kafka.partitions.dto
+      auto-offset-reset: earliest
+      concurrency: 3
+
+
+    topics:
+      web_logs:
+        name: web_logs
+        replicas: 3
+        partitions: 3
