@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  liquibase:
+    change-log: db.changelog/changelog.xml
+
+  kafka:
+    bootstrap-servers: localhost:9092,localhost:9094,localhost:9096
+
+    producer:
+      acks: all
+      retries: 3
+      linger-ms: 20
+      batch-size: 16384
+
+
+    topics:
+      orders:
+        name: new_orders
+        replicas: 3
+        partitions: 3
+
+      orders-dlq:
+        name: new_orders_dlq
+        replicas: 2
+        partitions: 3
+
+async:
+  kafka-executor:
+    core-pool-size: 4
+    max-pool-size: 8
+    queue-capacity: 100
+
+retries:
+  retry-policy: 3
+  back-off-period: 1000
