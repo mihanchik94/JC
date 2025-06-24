@@ -1,0 +1,1 @@
+create index idx_cart_items_user_id on cart_items(user_id);

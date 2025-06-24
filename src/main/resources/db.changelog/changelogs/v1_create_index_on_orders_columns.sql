@@ -1,0 +1,1 @@
+create index idx_orders_user_status on orders(user_id, status);
